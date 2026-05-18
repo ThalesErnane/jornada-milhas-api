@@ -2,6 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { DataSource } from 'typeorm';
+import { seedReserva } from './reserva/reserva.seed';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -21,6 +23,10 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
+
+  // Run seeds
+  const dataSource = app.get(DataSource);
+  await seedReserva(dataSource);
 
   await app.listen(8080);
 }
