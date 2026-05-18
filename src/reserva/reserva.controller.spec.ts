@@ -1,0 +1,29 @@
+import { Test, TestingModule } from '@nestjs/testing';
+import { ReservaController } from './reserva.controller';
+import { ReservaService } from './reserva.service';
+
+describe('ReservaController', () => {
+  let controller: ReservaController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [ReservaController],
+      providers: [
+        {
+          provide: ReservaService,
+          useValue: {
+            create: jest.fn(),
+            findAll: jest.fn(),
+            findOne: jest.fn(),
+          },
+        },
+      ],
+    }).compile();
+
+    controller = module.get<ReservaController>(ReservaController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
