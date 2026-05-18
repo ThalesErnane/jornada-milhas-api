@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import {
   ApiCreatedResponse,
   ApiOkResponse,
@@ -33,5 +33,19 @@ export class ReservaController {
   @ApiOkResponse({ type: ReservaDto })
   findOne(@Param('id') id: string) {
     return this.reservaService.findOne(+id);
+  }
+
+  @Get('pedidos/list')
+  @ApiOperation({ summary: 'Lista os pedidos do usuário autenticado' })
+  @ApiOkResponse({ type: ReservaDto, isArray: true })
+  getPedidos() {
+    return this.reservaService.findAll();
+  }
+
+  @Delete('pedidos/:id')
+  @ApiOperation({ summary: 'Remove um pedido pelo id' })
+  @ApiOkResponse({ type: ReservaDto })
+  removePedido(@Param('id') id: string) {
+    return this.reservaService.remove(+id);
   }
 }

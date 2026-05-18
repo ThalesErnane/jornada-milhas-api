@@ -22,4 +22,8 @@ export class ReservaService {
   findOne(id: number): Promise<Reserva | null> {
     return this.repository.findOneBy({ id });
   }
+
+  remove(id: number): Promise<any> {
+    return this.repository.delete(id);
+  }
 }
