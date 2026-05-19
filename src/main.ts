@@ -7,6 +7,7 @@ import { seedReserva } from './reserva/reserva.seed';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const port = Number(process.env.PORT) || 8081;
 
   const config = new DocumentBuilder()
     .setTitle('Jornada Milhas')
@@ -28,6 +29,6 @@ async function bootstrap() {
   const dataSource = app.get(DataSource);
   await seedReserva(dataSource);
 
-  await app.listen(8080);
+  await app.listen(port);
 }
 bootstrap();
