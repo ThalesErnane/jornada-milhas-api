@@ -28,18 +28,19 @@ export class ReservaController {
     return this.reservaService.findAll();
   }
 
-  @Get(':id')
-  @ApiOperation({ summary: 'Busca uma reserva por id' })
-  @ApiOkResponse({ type: ReservaDto })
-  findOne(@Param('id') id: string) {
-    return this.reservaService.findOne(+id);
-  }
-
+  @Get('pedidos')
   @Get('pedidos/list')
   @ApiOperation({ summary: 'Lista os pedidos do usuário autenticado' })
   @ApiOkResponse({ type: ReservaDto, isArray: true })
   getPedidos() {
     return this.reservaService.findAll();
+  }
+
+  @Get(':id')
+  @ApiOperation({ summary: 'Busca uma reserva por id' })
+  @ApiOkResponse({ type: ReservaDto })
+  findOne(@Param('id') id: string) {
+    return this.reservaService.findOne(+id);
   }
 
   @Delete('pedidos/:id')
